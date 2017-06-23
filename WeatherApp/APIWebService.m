@@ -10,9 +10,9 @@
 
 @implementation APIWebService
 
-NSString *URL_Key = @"88d22c8c03d68d25";
+NSString *URL_Key = @"**************";
 
-NSString *URLString = @"http://api.wunderground.com/api/88d22c8c03d68d25/forecast/q";
+NSString *URLString = @"http://api.wunderground.com/api/URL_Key/forecast/q";
 
 
 -(NSURLRequest*)createRequestwithURL:(NSString*)url {
