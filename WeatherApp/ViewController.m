@@ -118,6 +118,7 @@ didFailAutocompleteWithError:(NSError *)error {
     NSLog(@"Error: %@", [error description]);
 }
 
+
 // Turn the network activity indicator on and off again.
 - (void)didRequestAutocompletePredictionsForResultsController:
 (GMSAutocompleteResultsViewController *)resultsController {
@@ -188,3 +189,117 @@ didFailAutocompleteWithError:(NSError *)error {
 
 
 @end
+
+//Code for displaying weather in blocks in scroll view
+
+//#import "ViewController.h"
+//#import <GooglePlaces/GooglePlaces.h>
+//#import "Forecast.h"
+//#import "DailyForecast.h"
+//
+//@interface ViewController ()
+//
+//@property NSArray *address;
+//@property NSMutableArray *daysForecast;
+//@property (weak, nonatomic) IBOutlet UIScrollView *dailyForecastScrollView;
+//@property (weak, nonatomic) IBOutlet UILabel *maxTempLBL;
+//@property (weak, nonatomic) IBOutlet UILabel *minTempLBL;
+//@property (weak, nonatomic) IBOutlet UILabel *todayDescriptionLBL;
+//@property DailyForecast *dailyForecast;
+//
+//@end
+//
+//@implementation ViewController
+//
+//- (void)viewDidLoad {
+//    
+//    _client = [APIWebService new];
+//    _daysForecast = [[NSMutableArray alloc]init];
+//    _dailyForecast = [[DailyForecast alloc]init];
+//    
+//    _resultsViewController = [[GMSAutocompleteResultsViewController alloc] init];
+//    _resultsViewController.delegate = self;
+//    
+//    _searchController = [[UISearchController alloc]
+//                         initWithSearchResultsController:_resultsViewController];
+//    _searchController.searchResultsUpdater = _resultsViewController;
+//    
+//    [_searchController.searchBar sizeToFit];
+//    self.navigationItem.titleView = _searchController.searchBar;
+//    
+//    self.definesPresentationContext = YES;
+//    
+//    _searchController.hidesNavigationBarDuringPresentation = NO;
+//    
+//}
+//
+//// Handle the user's selection.
+//- (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController
+// didAutocompleteWithPlace:(GMSPlace *)place {
+//    _searchController.active = NO;
+//    self.searchController.searchBar.text = place.formattedAddress;
+//    
+//    // Do something with the selected place.
+//    _address = (NSArray*)[place.formattedAddress componentsSeparatedByString:@","];
+//    
+//    [self.daysForecast removeAllObjects];
+//    
+//    [_client getTemparatures:_address[0] respectiveState:_address[1] onSuccess:^(NSDictionary *dictionary) {
+//        
+//        NSArray *objects = dictionary[@"forecast"][@"simpleforecast"][@"forecastday"];
+//        
+//        for (NSDictionary *dictionary in objects) {
+//            [self.daysForecast addObject:[[Forecast alloc]initWithDictionary: dictionary]];
+//        }
+//        
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            [self getForecastForDay];
+//        });
+//    } onError:^(NSError *error) {
+//        NSLog(@"%@", error);
+//    }];
+//    
+//}
+//
+//- (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController
+//didFailAutocompleteWithError:(NSError *)error {
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    // TODO: handle the error.
+//    NSLog(@"Error: %@", [error description]);
+//}
+//
+//// Turn the network activity indicator on and off again.
+//- (void)didRequestAutocompletePredictionsForResultsController:
+//(GMSAutocompleteResultsViewController *)resultsController {
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//}
+//
+//- (void)didUpdateAutocompletePredictionsForResultsController:
+//(GMSAutocompleteResultsViewController *)resultsController {
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//}
+//
+//-(void)getForecastForDay {
+//    
+//    float count = 0.0;
+//    
+//    for (Forecast *day in self.daysForecast) {
+//        if (count == 0) {
+//            _maxTempLBL.text = [NSString stringWithFormat:@"%@°F", day.highTemp];
+//            _minTempLBL.text = [NSString stringWithFormat:@"%@°F", day.lowTemp];
+//            _todayDescriptionLBL.text = day.textDescription;
+//        }
+//        
+//        if (count <= 3 && count >=1){
+//            DailyForecast *block = [[DailyForecast alloc] initWithFrame:CGRectMake(138 * (count-1), 0, 138, 400)];
+//            [block configureBlock:day index:count];
+//            [self.dailyForecastScrollView addSubview:block];
+//        }
+//        
+//        count++;
+//    }
+//    
+//}
+//
+//@end
+

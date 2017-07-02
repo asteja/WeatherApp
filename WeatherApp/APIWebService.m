@@ -24,6 +24,7 @@ NSString *URLString = @"http://api.wunderground.com/api/URL_Key/forecast/q";
 {
     static NSURLSession *session = nil;
     static dispatch_once_t onceToken;
+   
     dispatch_once( &onceToken,
                   ^{
                       NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
